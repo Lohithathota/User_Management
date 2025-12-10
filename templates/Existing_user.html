@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Existing Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .top-bar {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .top-bar a {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0f7fa;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+            padding: 6px 12px;
+            margin-right: 5px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .edit-btn {
+            background-color: #2196F3;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Existing Users</h2>
+
+    <div class="top-bar">
+        <a href="/create_user">+ Add New User</a>
+    </div>
+
+    <table>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Fullname</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for u in users %}
+        <tr>
+            <td>{{ u.firstname }}</td>
+            <td>{{ u.lastname }}</td>
+            <td>{{ u.fullname }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.mobile }}</td>
+            <td class="action-buttons">
+                <a href="/edit/{{ u.email }}" class="edit-btn">Edit</a>
+                <a href="/delete/{{ u.email }}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

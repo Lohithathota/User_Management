@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            max-width: 400px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #responseMessage {
+            margin-top: 15px;
+            color: green;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Create New User</h2>
+
+    <form id="createUserForm">
+        <label>First Name:</label>
+        <input type="text" id="firstname" required>
+
+        <label>Last Name:</label>
+        <input type="text" id="lastname" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <label>Mobile:</label>
+        <input type="tel" id="mobile" required>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <p id="responseMessage"></p>
+
+    <a href="/users">View Existing Users</a>
+
+    <script>
+        const form = document.getElementById('createUserForm');
+        const responseMessage = document.getElementById('responseMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                firstname: document.getElementById('firstname').value,
+                lastname: document.getElementById('lastname').value,
+                email: document.getElementById('email').value,
+                mobile: document.getElementById('mobile').value
+            };
+
+            try {
+                const response = await fetch('/create_user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                responseMessage.textContent = result.message || "User created successfully!";
+                responseMessage.style.color = "green";
+                form.reset();
+            } catch (err) {
+                responseMessage.textContent = "Error creating user!";
+                responseMessage.style.color = "red";
+                console.error(err);
+            }
+        });
+    </script>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>{{ title }}</h2>
+
+    <div class="form-container">
+        <form method="POST" action="{{ action_url }}">
+            <label>First Name:</label>
+            <input type="text" name="firstname" value="{{ user.firstname if user else '' }}" required>
+
+            <label>Last Name:</label>
+            <input type="text" name="lastname" value="{{ user.lastname if user else '' }}" required>
+
+            <label>Email:</label>
+            {% if user %}
+                <input type="text" value="{{ user.email }}" disabled>
+            {% else %}
+                <input type="email" name="email" required>
+            {% endif %}
+
+            <label>Mobile:</label>
+            <input type="text" name="mobile" value="{{ user.mobile if user else '' }}" required>
+
+            <button type="submit">{{ button_text }}</button>
+        </form>
+
+        <div class="back-link">
+            <a href="/existing_users">Back to Users</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[disabled] {
+            background-color: #eee;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Edit User Details</h2>
+
+    <div class="form-container">
+        <form method="POST" action="/edit/{{ user.email }}">
+            <label>First Name:</label>
+            <input type="text" name="firstname" value="{{ user.firstname }}" required>
+
+            <label>Last Name:</label>
+            <input type="text" name="lastname" value="{{ user.lastname }}" required>
+
+            <label>Email (cannot change):</label>
+            <input type="text" value="{{ user.email }}" disabled>
+
+            <label>Mobile:</label>
+            <input type="text" name="mobile" value="{{ user.mobile }}" required>
+
+            <button type="submit">Update</button>
+        </form>
+
+        <div class="back-link">
+            <a href="/existing_users">Back to Existing Users</a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User</title>
+</head>
+<body>
+    <h2>Edit User</h2>
+
+    <form method="POST">
+        <label>First Name:</label>
+        <input type="text" name="firstname" value="{{ user.firstname }}" required><br><br>
+
+        <label>Last Name:</label>
+        <input type="text" name="lastname" value="{{ user.lastname }}" required><br><br>
+
+        <label>Email (cannot change):</label>
+        <input type="email" value="{{ user.email }}" readonly><br><br>
+
+        <label>Mobile:</label>
+        <input type="text" name="mobile" value="{{ user.mobile }}" required><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <br>
+    <a href="/existing_users">Back to Existing Users</a>
+</body>
+</html> -->
